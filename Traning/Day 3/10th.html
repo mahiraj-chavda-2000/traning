@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10th</title>
+    <style>
+        input[type=text],[type=email] {
+          width: 20%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+          width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+        
+        .container{
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+        </style>
+
+</head>
+
+<body>
+    <div class="container">
+    <form id="myForm">
+        name: <input type="text" name="name" id="name" placeholder="Enter Name"><br>
+        email: <input type="email" name="email" id="email" placeholder="Enter email"><br>
+        url: <input type="text" name="url" id="url">  
+        
+        <div id="clone">
+            Number of Members: <input type="text" name="member" id="member" required>
+            percentage: <input type="text" name="pr" id="pr" required>
+        </div>
+        <button id="remove">-</button> <button id="add">+</button>
+        <input type="submit" value="Save">
+    </form>
+</div>
+
+    <script>
+    
+
+        let addbutton = document.getElementById("add");
+        addbutton.addEventListener("click", function () {
+            let boxes = document.getElementById("clone");
+            let clone = boxes.cloneNode(true);
+            boxes.appendChild(clone);
+        });
+
+        let removebutton = document.getElementById("remove");
+          removebutton.addEventListener('click',function(){
+            let elem = document.getElementById("clone");
+            elem.parentNode.removeChild(elem);
+            
+           
+        });
+
+
+
+        
+    </script>
+
+</body>
+
+</html>

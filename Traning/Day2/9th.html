@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>9th</title>
+    <style>
+        button {
+
+            border-radius: 12px;
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button onclick="cloning()">new</button>  <!-- for creating new menu -->
+
+    <div id="clone">  <!-- div tag for clone -->
+        <button onclick="dec()">-</button>
+        <span id="num"></span>
+        <button onclick="inc()">+</button>
+    </div>
+
+    <script>
+
+        var x = 0;
+
+        document.getElementById('num').innerHTML = x;
+
+         function inc() {            //  function for increment value
+            document.getElementById('num').innerHTML = ++x;
+        }
+
+        function dec() {     //  function for decrement value
+            document.getElementById('num').innerHTML = --x;
+        }
+
+
+        function cloning() { //  function for meke clone 
+            let menu = document.querySelector('#clone');
+            let clonedMenu = menu.cloneNode(true);
+            clonedMenu.id = 'clone';
+            document.body.appendChild(clonedMenu);
+
+        }
+
+    </script>
+
+</body>
+
+</html>

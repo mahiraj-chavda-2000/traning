@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>11th</title>
+    <style>
+        .My-Form {
+            border-style: solid;
+            /* margin-bottom: 10px; */
+            /* margin-left: 10px; */
+            padding: 10px;
+            /* width: 50%; */
+            margin: auto;
+            width: 50%;
+            /* border: 3px solid green; */
+            /* padding: 10px; */
+        }
+
+        .My-Table {
+            border-style: solid;
+            /* margin-bottom: 10px; */
+            /* margin-left: 10px; */
+            padding: 20px;
+            /* width: 50%; */
+            margin: auto;
+            width: 70%;
+            /* border: 3px solid green; */
+            /* padding: 10px; */
+        }
+
+        body>table {
+            width: 80%;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table.list {
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even),
+        table.list thead>tr {
+            background-color: #dddddd;
+        }
+
+        input[type=text], [type=email],[type=password] {
+            width: 100%;
+            padding: 8px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 30%;
+            background-color: black;
+            color: white;
+            padding: 10px 18px;
+            /* margin: 0px 0; */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form div.form-action-buttons {
+            text-align: right;
+        }
+
+        a {
+            cursor: pointer;
+            text-decoration: underline;
+            color: #0000ee;
+            margin-right: 4px;
+        }
+      
+    </style>
+</head>
+
+<body>
+
+    <h1>
+
+    </h1>
+    <hr>
+    <div class="My-Form">
+        <form onsubmit="event.preventDefault();onFormSubmit();" autocomplete="off" id="form1">
+            <div>
+                <label>Full Name*</label>
+                <input type="text" name="Name" id="Name">
+            </div>
+            <div>
+                <label>Email Id</label>
+                <input type="email" name="email" id="email">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="password" id="password">
+            </div>
+
+            <div class="form-action-buttons">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+    <br />
+    <div class="My-Table">
+        <table class="list" id="My-List">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email Id</th>
+                    <th>password</th>
+                    
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var selectedRow = null
+
+        function onFormSubmit() {
+         
+                var formData = readFormData();
+                if (selectedRow == null)
+                    insertNewRecord(formData);
+                else
+                    updateRecord(formData);
+                resetForm();
+            
+        }
+
+        function readFormData() {
+            var formData = {};
+           
+            formData["Name"] = document.getElementById("Name").value;
+            formData["email"] = document.getElementById("email").value;
+            formData["password"] = document.getElementById("password").value;
+            return formData;
+        }
+
+        function insertNewRecord(data) {
+            var table = document.getElementById("My-List").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.length);
+            cell1 = newRow.insertCell(0);
+            cell1.innerHTML = data.Name;
+            cell2 = newRow.insertCell(1);
+            cell2.innerHTML = data.email;
+            cell3 = newRow.insertCell(2);
+            cell3.innerHTML = data.password;
+           
+            cell3 = newRow.insertCell(3);
+            cell3.innerHTML = `<a onClick="onEdit(this)">Edit</a>
+                       <a onClick="onDelete(this)">Delete</a>`;
+        }
+
+        function resetForm() {
+            document.getElementById("Name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+            
+            selectedRow = null;
+        }
+
+        function onEdit(td) {
+            selectedRow = td.parentElement.parentElement;
+            document.getElementById("Name").value = selectedRow.cells[0].innerHTML;
+            document.getElementById("email").value = selectedRow.cells[1].innerHTML;
+            document.getElementById("password").value = selectedRow.cells[2].innerHTML;
+         
+        }
+        function updateRecord(formData) {
+            selectedRow.cells[0].innerHTML = formData.Name;
+            selectedRow.cells[1].innerHTML = formData.email;
+            selectedRow.cells[2].innerHTML = formData.password;
+            
+        }
+
+        function onDelete(td) {
+            if (confirm('Are you sure to delete this record ?')) {
+                row = td.parentElement.parentElement;
+                document.getElementById("My-List").deleteRow(row.rowIndex);
+                resetForm();
+            }
+        }
+       
+
+
+    </script>
+</body>
+
+</html>
