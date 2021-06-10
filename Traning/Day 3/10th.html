@@ -2,83 +2,101 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10th</title>
-    <style>
-        input[type=text],[type=email] {
-          width: 20%;
-          padding: 12px 20px;
-          margin: 8px 0;
-          display: inline-block;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-sizing: border-box;
-        }
-        
-        input[type=submit] {
-          width: 100%;
-          background-color: #4CAF50;
-          color: white;
-          padding: 14px 20px;
-          margin: 8px 0;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-        
-        input[type=submit]:hover {
-          background-color: #45a049;
-        }
-        
-        .container{
-          border-radius: 5px;
-          background-color: #f2f2f2;
-          padding: 20px;
-        }
-        </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10th</title>
+
 
 </head>
 
+
 <body>
-    <div class="container">
-    <form id="myForm">
-        name: <input type="text" name="name" id="name" placeholder="Enter Name"><br>
-        email: <input type="email" name="email" id="email" placeholder="Enter email"><br>
-        url: <input type="text" name="url" id="url">  
-        
-        <div id="clone">
-            Number of Members: <input type="text" name="member" id="member" required>
-            percentage: <input type="text" name="pr" id="pr" required>
-        </div>
-        <button id="remove">-</button> <button id="add">+</button>
-        <input type="submit" value="Save">
-    </form>
-</div>
 
-    <script>
+  <form id="myForm" action="/Day 3/10th.php" method="POST">
+    <div id="clone" class="MyDiv" style="visibility: hidden;">
+      Number of Members: <input type="text" name="member" id="member">
+      percentage: <input type="text" name="pr" id="pr">
+      <button id="del" class="a" onclick="del(this)">-</button>
+    </div>
+    <div id="test"></div>
+    <button id="add" class="a" onclick="inc(this)">+</button>
+
+    <input type="submit" value="save">
+    <spam id="response"></spam>
+  </form>
+
+
+  <script>
+
+
+    function validateForm() {
+      
+      var x = document.forms["myForm"]["member"].value;
+      var y = document.forms["myForm"]["pr"].value;
+
+      if (x == "" || y == "") {
+        alert("Name must be filled out");
+        return false;
+      }
+    }
+
+    var forms = document.getElementById("myForm");
+    forms.addEventListener('submit', function (event) {
     
+      event.preventDefault();
+      validateForm();
+      var member = document.getElementById("member").value;
+      var pers = document.getElementById("pr").value;
 
-        let addbutton = document.getElementById("add");
-        addbutton.addEventListener("click", function () {
-            let boxes = document.getElementById("clone");
-            let clone = boxes.cloneNode(true);
-            boxes.appendChild(clone);
-        });
-
-        let removebutton = document.getElementById("remove");
-          removebutton.addEventListener('click',function(){
-            let elem = document.getElementById("clone");
-            elem.parentNode.removeChild(elem);
-            
-           
-        });
-
+      var xhttp = new XMLHttpRequest();
+      xhttp.open('POST', "10th.php", true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+          document.getElementById('response').innerHTML = xhttp.responseText;
+        }
+      }
+      xhttp.send('member' + member + "&pers" + pers);
 
 
-        
-    </script>
+    });
+
+
+
+    function inc(event) {
+      let d = document.getElementById('test');
+
+
+      let elem = document.getElementsByClassName("MyDiv")[0];
+
+      let clon = elem.cloneNode(true);
+
+      document.body.appendChild(clon);
+
+      var totalCloneElem = document.getElementsByClassName('MyDiv').length;
+      document.getElementsByClassName("MyDiv")[totalCloneElem - 1].querySelector('#member').value = '';
+      document.getElementsByClassName("MyDiv")[totalCloneElem - 1].querySelector('#pr').value = '';
+      let vis = document.getElementsByClassName("MyDiv")[totalCloneElem - 1];
+      vis.style.visibility = "visible";
+
+      // let NewElem = document.createElement('BUTTON');
+      // NewElem.innerHTML = "-"
+      // document.body.appendChild(NewElem);
+
+    }
+    function del(event) {
+      var totalCloneElem = document.getElementsByClassName('MyDiv').length;
+
+      let elem = document.getElementsByClassName("MyDiv")[totalCloneElem - 1];
+      elem.parentNode.removeChild(elem);
+
+    }
+
+
+
+
+  </script>
 
 </body>
 
