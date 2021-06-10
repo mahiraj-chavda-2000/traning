@@ -6,36 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8th</title>
-    <style>
-        button {
-
-            border-radius: 12px;
-            background-color: white;
-            color: black;
-            border: 2px solid #4CAF50;
-        }
-    </style>
+  
 </head>
 
 <body>
 
     <script>
-        let x = 0;
 
-        document.getElementById('num').innerHTML = x;
+        function inc(event) {            //  function for increment value
+            event.parentElement.querySelectorAll('.t')[0].value++;
 
-        function inc() {
-            document.getElementById('num').innerHTML = ++x;
         }
 
-        function dec() {
-            document.getElementById('num').innerHTML = --x;
+        function dec(event) {
+
+            //  function for decrement value
+            event.parentElement.querySelectorAll('.t')[0].value--;
+
         }
     </script>
-
-    <button onclick="dec()">-</button>
-    <span id="num"></span>
-    <button onclick="inc()">+</button>
+    <button id="sub" onclick="dec(this)">-</button>
+    <input type="text" id="num" class="t">
+    <button id="add" onclick="inc(this)">+</button>
 </body>
 
 </html>

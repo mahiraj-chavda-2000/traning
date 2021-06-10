@@ -3,47 +3,42 @@
 
 <head>
     <title>9th</title>
-    <style>
-        button {
-
-            border-radius: 12px;
-            background-color: white;
-            color: black;
-            border: 2px solid #4CAF50;
-        }
-    </style>
+   
 </head>
 
 <body>
 
-    <button onclick="cloning()">new</button>  <!-- for creating new menu -->
-
-    <div id="clone">  <!-- div tag for clone -->
-        <button onclick="dec()">-</button>
-        <span id="num"></span>
-        <button onclick="inc()">+</button>
+    <button onclick="cloning(this)" style="text-align: center;">new</button> <!-- for creating new menu -->
+    <div></div>
+    <div class="cloneDiv">
+        <!-- div tag for clone -->
+        <button id="sub" onclick="dec(this)">-</button>
+        <input type="text" id="num" class="t">
+        <button id="add" onclick="inc(this)">+</button>
     </div>
 
     <script>
 
-        var x = 0;
+        function inc(event) {            //  function for increment value
+            event.parentElement.querySelectorAll('.t')[0].value++;
 
-        document.getElementById('num').innerHTML = x;
-
-         function inc() {            //  function for increment value
-            document.getElementById('num').innerHTML = ++x;
         }
 
-        function dec() {     //  function for decrement value
-            document.getElementById('num').innerHTML = --x;
+        function dec(event) {
+
+            //  function for decrement value
+            event.parentElement.querySelectorAll('.t')[0].value--;
+
         }
 
 
-        function cloning() { //  function for meke clone 
-            let menu = document.querySelector('#clone');
-            let clonedMenu = menu.cloneNode(true);
-            clonedMenu.id = 'clone';
-            document.body.appendChild(clonedMenu);
+        function cloning(event) { //  function for make clone 
+            let elem = document.getElementsByClassName("cloneDiv")[0];
+            let clon = elem.cloneNode(true);
+            document.body.appendChild(clon);
+            var totalCloneElem = document.getElementsByClassName('cloneDiv').length;
+            document.getElementsByClassName("cloneDiv")[totalCloneElem - 1].querySelector('#num').value = '';
+
 
         }
 
