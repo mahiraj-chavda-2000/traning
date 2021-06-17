@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>JavaScript HTML DOM</h2>
+    <p>Add a new HTML Element.</p>
+
+    <div id="div1">
+        <p id="p1">This is a paragraph.</p>
+        <p id="p2">This is another paragraph.</p>
+    </div>
+<button onclick="add()">+++</button>
+    <script>
+         function add() {
+              count=1;
+        // count = ('table tr').length;
+        text = "<tr id=" + count + ">" +
+            " <td>Number of Members: <input type='text' name='member[]' id='member_" + count + "' ></td>" +
+            " <td> percentage: <input type='text' name='pr[]' id='pr_" + count + "' ></td>" +
+            "<td>  <button class='a' onclick='del(this)'>-</button></td></tr>";
+
+        const para = document.createElement("p");
+        const node = document.textContent("This is new.");
+        para.appendChild(node);
+
+        const element = document.getElementById("div1");
+        const child = document.getElementById("p1");
+        element.insertBefore(para, child);
+    }
+    </script>
+
+</body>
+
+</html>
